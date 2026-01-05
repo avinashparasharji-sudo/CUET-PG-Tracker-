@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CUET PG English Literature Tracker</title>
+  <style>
+    body{
+      margin:0; padding:0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:#0f172a; color:#e5e7eb;
+      text-align:center;
+    }
+    header{
+      padding:20px;
+      font-size:1.6rem;
+      font-weight:bold;
+      letter-spacing:1px;
+    }
+    .sub{
+      font-size:0.9rem; opacity:0.8;
+    }
+    .container{
+      width:90%; max-width:900px;
+      margin:20px auto;
+      background:#020617;
+      border-radius:16px;
+      padding:25px;
+      box-shadow:0 0 20px rgba(0,0,0,0.6);
+    }
+    .countdown{
+      font-size:2rem;
+      margin-bottom:20px;
+    }
+    .progress-wrap{
+      margin:20px 0;
+    }
+    .bar{
+      width:100%; height:28px;
+      background:#1e293b;
+      border-radius:20px;
+      overflow:hidden;
+    }
+    .fill{
+      height:100%; width:0%;
+      background:linear-gradient(90deg,#22c55e,#16a34a);
+      line-height:28px;
+      font-weight:bold;
+    }
+    button{
+      margin-top:12px;
+      padding:10px 20px;
+      border:none;
+      border-radius:10px;
+      background:#22c55e;
+      color:#020617;
+      font-weight:bold;
+      cursor:pointer;
+    }
+    .syllabus{
+      text-align:left;
+      margin-top:25px;
+      line-height:1.7;
+      font-size:0.95rem;
+    }
+    footer{
+      margin-top:25px;
+      font-size:0.8rem;
+      opacity:0.7;
+    }
+  </style>
+</head>
+<body><header>
+  CUET PG English Literature Tracker
+  <div class="sub">Developed by <b>Avinash Parashar</b></div>
+</header><div class="container">  <div class="countdown" id="countdown"></div>  <div class="progress-wrap">
+    <div>Syllabus Completion</div>
+    <div class="bar">
+      <div class="fill" id="fill">0%</div>
+    </div>
+    <button onclick="increase()">Mark Topic Completed</button>
+  </div>  <div class="syllabus">
+    <b>British Literature:</b><br>
+    Old English → Middle English → Renaissance → Jacobean → Restoration → Augustan → Romantic → Victorian → Modern → Postmodern
+    <br><br>
+    <b>World Literature:</b><br>
+    American → African → Caribbean → Canadian → Australian → Latin American → European → Russian → East Asian → Middle Eastern
+    <br><br>
+    <b>Indian Literature:</b><br>
+    Indian Writing in English → Indian English Poetry → Indian English Fiction → Indian English Drama → Regional Literatures → Dalit Writing → Feminist Writing → Postcolonial Writing
+    <br><br>
+    <b>Theory & Criticism:</b><br>
+    Classical Criticism → Renaissance Criticism → Neo‑classical → Romantic → Victorian → Modern Criticism → Structuralism → Post‑Structuralism → Marxism → Feminism → Psychoanalysis → New Historicism → Postcolonialism → Cultural Studies → Translation Studies → Film Studies → Genre Studies → Linguistics & Language
+  </div></div><footer>
+  CUET PG English Literature
+</footer><script>
+  const examDate = new Date("2026-03-15T09:00:00");
+  function timer(){
+    const now = new Date();
+    const diff = examDate - now;
+    if(diff<=0){
+      document.getElementById('countdown').innerText = 'Exam Time';
+      return;
+    }
+    const d = Math.floor(diff/(1000*60*60*24));
+    const h = Math.floor((diff/(1000*60*60))%24);
+    const m = Math.floor((diff/(1000*60))%60);
+    const s = Math.floor((diff/1000)%60);
+    document.getElementById('countdown').innerText = `${d}d ${h}h ${m}m ${s}s left`;
+  }
+  setInterval(timer,1000);
+
+  let progress = localStorage.getItem('cuetProgress') || 0;
+  function render(){
+    document.getElementById('fill').style.width = progress+'%';
+    document.getElementById('fill').innerText = progress+'%';
+  }
+  function increase(){
+    if(progress<100){ progress++; }
+    localStorage.setItem('cuetProgress',progress);
+    render();
+  }
+  render();
+</script></body>
+</html>
